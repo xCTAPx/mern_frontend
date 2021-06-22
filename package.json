@@ -68,5 +68,10 @@
       "prettier --write",
       "yarn lint"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "precommit": "yarn precommit"
+    }
   }
 }
