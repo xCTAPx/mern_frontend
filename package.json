@@ -2,7 +2,14 @@
   "name": "mern_frontend",
   "version": "0.0.0-alpha.1",
   "description": "Front-end part of full-stack web-application which uses reactjs library for view and redux library for state management. All project uses typescript as decision for types.",
-  "keywords": ["mern", "react", "redux", "nodejs", "expressjs", "mongoDB"],
+  "keywords": [
+    "mern",
+    "react",
+    "redux",
+    "nodejs",
+    "expressjs",
+    "mongoDB"
+  ],
   "author": "Vadim Mechiev <sudkurve@mail.ru>",
   "private": true,
   "dependencies": {
@@ -16,14 +23,16 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
-    "typescript": "^4.1.2",
+    "typescript": "^4.3.4",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint && tsc",
+    "precommit": "lint-staged"
   },
   "eslintConfig": {
     "extends": [
@@ -41,6 +50,19 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.28.0",
+    "@typescript-eslint/parser": "^4.28.0",
+    "eslint": "^7.29.0",
+    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-react": "^7.24.0",
+    "prettier": "^2.3.1"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "yarn lint"
     ]
   }
 }
