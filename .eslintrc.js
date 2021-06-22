@@ -20,6 +20,7 @@ module.exports = {
   rules: {
     "quotes": ["error", "single"],
     "no-extra-semi": "error",
+    "no-console": "warn",
     "semi": ["error", "always"],
   }
 };
