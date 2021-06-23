@@ -18,9 +18,10 @@ module.exports = {
     'prettier',
   ],
   rules: {
-    "quotes": ["error", "single"],
-    "no-extra-semi": "error",
-    "no-console": "warn",
-    "semi": ["error", "always"],
-  }
+    quotes: ['error', 'single'],
+    'no-extra-semi': 'error',
+    'no-console': 'warn',
+    'no-alert': 'error',
+    semi: ['error', 'always'],
+  },
 };
