@@ -35,7 +35,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .ts,.tsx",
     "prepare": "husky install",
-    "heroku-postbuild": "serve -s build"
+    "heroku-postbuild": "yarn global add serve && serve -s build"
   },
   "eslintConfig": {
     "extends": [
