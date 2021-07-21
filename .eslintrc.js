@@ -8,7 +8,12 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: ['@typescript-eslint', 'jest', 'react'],
+  plugins: [
+    '@typescript-eslint',
+    'jest',
+    'react',
+    'prettier',
+  ],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
@@ -23,5 +28,7 @@ module.exports = {
     'no-console': 'warn',
     'no-alert': 'error',
     semi: ['error', 'always'],
+    'react/prop-types': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
   },
 };

@@ -1,5 +1,30 @@
-.text {
-    color: rgb(228, 22, 22);
+@import "../../utils/palette.scss";
+
+.background {
+    background-color: $swampy;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.title {
+    color: $dark_blue;
     font-size: 24px;
     text-align: center;
+    padding-bottom: 24px;
+    text-transform: uppercase;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+.form {
+    width: 30%;
+    margin: 0 auto;
+}
+
+.inputWrapper {
+    padding-bottom: 24px;
 }
