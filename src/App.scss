@@ -6,3 +6,14 @@
     box-sizing: border-box;
     font-family: 'Raleway', sans-serif;
 }
+
+.mode {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    bottom: 4px;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}

@@ -1,1 +1,1 @@
-export { isProduction } from './envMode';
+export * from './envMode';
