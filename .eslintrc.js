@@ -30,5 +30,6 @@ module.exports = {
     semi: ['error', 'always'],
     'react/prop-types': 'off',
     '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
   },
 };
