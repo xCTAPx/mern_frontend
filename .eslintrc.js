@@ -29,6 +29,12 @@ module.exports = {
     'no-alert': 'error',
     semi: ['error', 'always'],
     'react/prop-types': 'off',
+    'react/jsx-sort-props': [
+      'warn',
+      {
+        callbacksLast: true,
+      },
+    ],
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-unsafe-member-access': 'off',
   },
