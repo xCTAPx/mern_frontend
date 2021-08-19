@@ -21,6 +21,8 @@ interface IProps {
   placeholder?: string;
   field?: IFormikProps;
   form?: IFormikForm;
+  error?: boolean;
+  errorMessage?: string;
   onChange?: () => void;
   onFocus?: () => void;
   onBlur?: () => void;
@@ -32,6 +34,8 @@ export const Input: React.FC<IProps> = ({
   type = 'text',
   placeholder,
   field,
+  error,
+  errorMessage,
   onChange = () => {},
   onFocus = () => {},
   onBlur = () => {},
@@ -39,6 +43,10 @@ export const Input: React.FC<IProps> = ({
   const [inputValue, setInputValue] = useState<string>(
     value || ''
   );
+
+  const classes = `${styles.input} ${
+    error ? styles.input_error : ''
+  }`;
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement>
@@ -50,31 +58,41 @@ export const Input: React.FC<IProps> = ({
   return (
     <>
       {type === 'text' && (
-        <input
-          className={styles.input}
-          name={name}
-          placeholder={placeholder}
-          value={inputValue}
-          onBlur={onBlur}
-          onChange={handleChange}
-          onFocus={onFocus}
-          {...field}
-        />
+        <div className={styles.input_wrapper}>
+          <input
+            className={classes}
+            name={name}
+            placeholder={placeholder}
+            value={inputValue}
+            onBlur={onBlur}
+            onChange={handleChange}
+            onFocus={onFocus}
+            {...field}
+          />
+          <p className={styles.error_message}>
+            {errorMessage}
+          </p>
+        </div>
       )}
 
       {type === 'password' && (
-        <input
-          autoComplete="on"
-          className={styles.input}
-          name={name}
-          placeholder={placeholder}
-          type="password"
-          value={inputValue}
-          onBlur={onBlur}
-          onChange={handleChange}
-          onFocus={onFocus}
-          {...field}
-        />
+        <div className={styles.input_wrapper}>
+          <input
+            autoComplete="on"
+            className={classes}
+            name={name}
+            placeholder={placeholder}
+            type="password"
+            value={inputValue}
+            onBlur={onBlur}
+            onChange={handleChange}
+            onFocus={onFocus}
+            {...field}
+          />
+          <p className={styles.error_message}>
+            {errorMessage}
+          </p>
+        </div>
       )}
     </>
   );
