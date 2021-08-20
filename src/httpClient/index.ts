@@ -1,11 +1,14 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, {
+  AxiosRequestConfig,
+  AxiosInstance,
+} from 'axios';
 
-export const api = axios.create({
+export const httpClient: AxiosInstance = axios.create({
   withCredentials: true,
   baseURL: process.env.REACT_APP_API_URL,
 });
 
-api.interceptors.request.use(
+httpClient.interceptors.request.use(
   (config: AxiosRequestConfig): AxiosRequestConfig => {
     config.headers.Authorization = `Bearer ${
       localStorage.getItem('accessToken') || ''

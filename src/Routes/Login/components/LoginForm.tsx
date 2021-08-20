@@ -1,5 +1,6 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
+import { useDispatch } from 'react-redux';
 import styles from './LoginForm.module.scss';
 import { loginSchema } from '../../../validation';
 import { Input } from '../../../components';
@@ -19,13 +20,20 @@ const INITIAL_VALUES: IValues = {
 };
 
 export const LoginForm: React.FC = () => {
+  const dispatch = useDispatch();
+
   return (
     <Formik
       initialValues={INITIAL_VALUES}
       validateOnBlur
       validationSchema={loginSchema}
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      onSubmit={(values: IValues) => {}}>
+      onSubmit={(values: IValues) => {
+        dispatch({
+          type: 'LOGIN_FORM_SEND_DATA',
+          payload: values,
+        });
+      }}>
       {({ errors, touched }) => {
         const {
           email: emailTouched,

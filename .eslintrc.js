@@ -37,5 +37,8 @@ module.exports = {
     ],
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-unsafe-member-access': 'off',
+    '@typescript-eslint/restrict-template-expressions':
+      'off',
+    '@typescript-eslint/unbound-method': 'off',
   },
 };
