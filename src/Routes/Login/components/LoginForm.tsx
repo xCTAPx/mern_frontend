@@ -9,14 +9,14 @@ interface IValues {
   email: string;
   nickname: string;
   password: string;
-  password_confirmation: string;
+  passwordConfirmation: string;
 }
 
 const INITIAL_VALUES: IValues = {
   email: '',
   nickname: '',
   password: '',
-  password_confirmation: '',
+  passwordConfirmation: '',
 };
 
 export const LoginForm: React.FC = () => {
@@ -27,7 +27,6 @@ export const LoginForm: React.FC = () => {
       initialValues={INITIAL_VALUES}
       validateOnBlur
       validationSchema={loginSchema}
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onSubmit={(values: IValues) => {
         dispatch({
           type: 'LOGIN_FORM_SEND_DATA',
@@ -39,7 +38,7 @@ export const LoginForm: React.FC = () => {
           email: emailTouched,
           nickname: nicknameTouched,
           password: passwordTouched,
-          password_confirmation:
+          passwordConfirmation:
             password_confirmationTouched,
         } = touched;
 
@@ -47,13 +46,13 @@ export const LoginForm: React.FC = () => {
           email: emailError,
           nickname: nicknameError,
           password: passwordError,
-          password_confirmation: password_confirmationError,
+          passwordConfirmation: password_confirmationError,
         } = errors;
 
         const email = emailTouched && emailError;
         const nickname = nicknameTouched && nicknameError;
         const password = passwordTouched && passwordError;
-        const password_confirmation =
+        const passwordConfirmation =
           password_confirmationTouched &&
           password_confirmationError;
 
@@ -92,9 +91,9 @@ export const LoginForm: React.FC = () => {
               <div className={styles.inputWrapper}>
                 <Field
                   component={Input}
-                  error={password_confirmation}
-                  errorMessage={password_confirmation}
-                  name="password_confirmation"
+                  error={passwordConfirmation}
+                  errorMessage={passwordConfirmation}
+                  name="passwordConfirmation"
                   placeholder="Confirm password"
                   type="password"
                 />

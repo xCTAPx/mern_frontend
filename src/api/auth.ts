@@ -3,15 +3,10 @@ import { httpClient } from '../httpClient';
 
 const REQUEST_URL = '/auth';
 
-interface IUserData {
-  email: string;
-  password: string;
-  passwordConfirmation: string;
-  nickname: string;
-}
-
 interface IAuthApi {
-  register: (userData: IUserData) => Promise<AxiosResponse>;
+  register: (
+    userData: IUserData
+  ) => Promise<AxiosResponse<IUserData>>;
 }
 
 const { post } = httpClient;

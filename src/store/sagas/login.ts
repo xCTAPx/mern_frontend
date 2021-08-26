@@ -1,18 +1,27 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { AxiosResponse } from 'axios';
+import {
+  call,
+  CallEffect,
+  ForkEffect,
+  put,
+  PutEffect,
+  takeEvery,
+} from 'redux-saga/effects';
 import { createApi } from '../../api';
 
-interface IAction {
-  type: string;
-  payload?: any;
-}
+type WatchRegister = Generator<ForkEffect<never>>;
+type AuthSaga = Generator<
+  | PutEffect<{ type: string, user: unknown }>
+  | CallEffect<AxiosResponse<IUserData>>
+>;
 
 const api = createApi();
 
-function* authSaga(action: IAction): Generator<any> {
+function* authSaga(action: IAction): AuthSaga {
   const user = yield call(api.register, action.payload);
   yield put({ type: 'LOGIN_SUCCEEDED', user });
 }
 
-export function* register(): Generator<any> {
-  yield takeLatest('LOGIN_FORM_SEND_DATA', authSaga);
+export function* watchRegister(): WatchRegister {
+  yield takeEvery('LOGIN_FORM_SEND_DATA', authSaga);
 }

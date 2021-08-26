@@ -17,7 +17,7 @@ export const loginSchema = Yup.object().shape({
     .min(8, messages.SHORT(8))
     .max(32, messages.LONG(32))
     .required(messages.REQUIRED),
-  password_confirmation: Yup.string()
+  passwordConfirmation: Yup.string()
     .trim()
     .min(8, messages.SHORT(8))
     .max(32, messages.LONG(32))
