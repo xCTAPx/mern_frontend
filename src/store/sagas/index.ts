@@ -1,6 +1,12 @@
-import { all } from 'redux-saga/effects';
-import { watchRegister } from './login';
+import { all, AllEffect } from 'redux-saga/effects';
+import { WatchRegister, watchRegister } from './auth';
 
-export function* rootSaga() {
+type RootSaga = Generator<
+  AllEffect<WatchRegister>,
+  void,
+  void
+>;
+
+export function* rootSaga(): RootSaga {
   yield all([watchRegister()]);
 }

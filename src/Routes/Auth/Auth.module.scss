@@ -1,7 +1,16 @@
+@import "../../utils/palette.scss";
+
 .background {
     background-image: url(../../assets/login/background.jpeg);
     height: 100vh;
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+.tabs {
+    background: $white;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    margin: 0 auto;
 }

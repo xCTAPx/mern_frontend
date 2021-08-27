@@ -9,7 +9,7 @@ import {
 } from 'redux-saga/effects';
 import { createApi } from '../../api';
 
-type WatchRegister = Generator<ForkEffect<never>>;
+export type WatchRegister = Generator<ForkEffect<never>>;
 type AuthSaga = Generator<
   | PutEffect<{ type: string, user: unknown }>
   | CallEffect<AxiosResponse<IUserData>>

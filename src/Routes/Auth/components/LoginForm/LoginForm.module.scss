@@ -1,11 +1,12 @@
-@import "../../../utils/palette.scss";
+@import "../../../../utils/palette.scss";
 
-.loginWrapper {
+.wrapper {
     background-color: $white;
     margin: 0 auto;
     width: 600px;
     padding: 20px;
     border-radius: 16px;
+    height: 420px;
 }
 
 .title {

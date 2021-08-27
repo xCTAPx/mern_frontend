@@ -1,12 +1,15 @@
 import React from 'react';
-import { withRouter } from 'react-router';
+import { Redirect, withRouter } from 'react-router';
 import { Switch, Route } from 'react-router-dom';
-import { Login } from '../Routes';
+import { Auth } from '../Routes';
 
 const Routes: React.FC = () => {
   return (
     <Switch>
-      <Route component={Login} path="/login" />
+      <Route exact path="/">
+        <Redirect to="/auth" />
+      </Route>
+      <Route component={Auth} path="/auth" />
     </Switch>
   );
 };
