@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch } from 'react-redux';
+import { Button, Icon } from '@material-ui/core';
 import styles from './LoginForm.module.scss';
 import { loginSchema } from '../../../validation';
 import { Input } from '../../../components';
@@ -98,8 +99,15 @@ export const LoginForm: React.FC = () => {
                   type="password"
                 />
               </div>
+              <Button
+                color="primary"
+                endIcon={<Icon>send</Icon>}
+                size="large"
+                type="submit"
+                variant="contained">
+                Submit
+              </Button>
             </div>
-            <button type="submit">Send</button>
           </Form>
         );
       }}
