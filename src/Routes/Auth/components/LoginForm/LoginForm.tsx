@@ -71,6 +71,13 @@ export const LoginForm: React.FC = () => {
                   type="password"
                 />
               </div>
+              <div className={styles.textButtonContainer}>
+                <Button
+                  color="primary"
+                  href="#text-buttons">
+                  Forget password?
+                </Button>
+              </div>
               <Button
                 color="primary"
                 endIcon={<Icon>send</Icon>}

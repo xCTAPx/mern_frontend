@@ -40,5 +40,7 @@ module.exports = {
     '@typescript-eslint/restrict-template-expressions':
       'off',
     '@typescript-eslint/unbound-method': 'off',
+    '@typescript-eslint/no-unsafe-return': 'off',
+    '@typescript-eslint/ban-types': 'off',
   },
 };

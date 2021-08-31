@@ -1,3 +1,8 @@
 import { combineReducers, Reducer } from 'redux';
+import { user } from './user';
 
-export const rootReducer: Reducer = combineReducers({});
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-ignore
+export const rootReducer: Reducer = combineReducers({
+  user,
+});
