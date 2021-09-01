@@ -6,7 +6,7 @@ const REQUEST_URL = '/auth';
 interface IAuthApi {
   register: (
     userData: IUserData
-  ) => Promise<AxiosResponse<IUserData>>;
+  ) => Promise<AxiosResponse<IUserDataResponse>>;
 }
 
 const { post } = httpClient;

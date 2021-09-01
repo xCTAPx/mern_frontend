@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch } from 'react-redux';
 import { Button, Icon } from '@material-ui/core';
-import styles from './LoginForm.module.scss';
+import styles from '../Common.module.scss';
 import { loginSchema } from '../../../../validation';
 import { Input } from '../../../../components';
 
@@ -71,6 +71,7 @@ export const LoginForm: React.FC = () => {
                   type="password"
                 />
               </div>
+
               <div className={styles.textButtonContainer}>
                 <Button
                   color="primary"

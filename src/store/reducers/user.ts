@@ -1,10 +1,11 @@
-type State = IUser | {};
-type UserReducer = (
-  state: State,
-  action: IAction<IUser>
-) => IUser | {};
+import { Reducer } from 'redux';
 
-export const user: UserReducer = (state = {}, action) => {
+type State = IUser | {};
+
+export const user: Reducer<State, IAction<IUser>> = (
+  state = {},
+  action
+) => {
   switch (action.type) {
     case 'USER_RECEIVED':
       return action.payload;

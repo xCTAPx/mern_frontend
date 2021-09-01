@@ -4,3 +4,10 @@ declare interface IUserData {
   passwordConfirmation: string;
   nickname: string;
 }
+
+declare interface IUserDataResponse {
+  email: string;
+  nickname: string;
+  id: string;
+  isActivated: boolean;
+}

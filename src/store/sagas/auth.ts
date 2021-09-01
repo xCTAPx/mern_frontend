@@ -8,19 +8,23 @@ import {
 } from 'redux-saga/effects';
 import { createApi } from '../../api';
 
-export type WatchRegister = Generator<ForkEffect<never>>;
+export type WatchRegister = Generator<
+  ForkEffect<never>,
+  void,
+  void
+>;
 type AuthSaga = Generator<
-  | ForkEffect<AxiosResponse<IUserData>>
-  | PutEffect<IAction<IUserData>>
+  | ForkEffect<AxiosResponse<IUserDataResponse>>
+  | PutEffect<IAction<unknown>>,
+  void,
+  void
 >;
 
 const api = createApi();
 
 function* authSaga(action: IAction<IUserData>): AuthSaga {
   const user = yield spawn(api.register, action.payload);
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  //@ts-ignore
-  yield put({ type: 'LOGIN_SUCCEEDED', user });
+  yield put({ type: 'LOGIN_SUCCEEDED', payload: user });
 }
 
 export function* watchRegister(): WatchRegister {

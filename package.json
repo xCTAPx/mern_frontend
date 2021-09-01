@@ -83,7 +83,7 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "prettier --write",
-      "yarn lint"
+      "eslint . --ext .ts,.tsx"
     ]
   },
   "husky": {
