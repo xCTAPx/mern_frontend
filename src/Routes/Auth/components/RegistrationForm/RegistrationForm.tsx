@@ -2,8 +2,8 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch } from 'react-redux';
 import { Button, Icon } from '@material-ui/core';
-import styles from '../Common.module.scss';
-import { loginSchema } from '../../../../validation';
+import styles from '../../../../styles/Credentials.module.scss';
+import { authSchema } from '../../../../validation';
 import { Input } from '../../../../components';
 
 interface IValues {
@@ -27,7 +27,7 @@ export const RegistrationForm: React.FC = () => {
     <Formik
       initialValues={INITIAL_VALUES}
       validateOnBlur
-      validationSchema={loginSchema}
+      validationSchema={authSchema}
       onSubmit={(values: IValues) => {
         dispatch({
           type: 'LOGIN_FORM_SEND_DATA',

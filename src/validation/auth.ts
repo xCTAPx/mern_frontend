@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import * as messages from './messages';
 import { PASSWORD } from './validators';
 
-export const loginSchema = Yup.object().shape({
+export const authSchema = Yup.object().shape({
   email: Yup.string()
     .trim()
     .email(messages.INVALID_EMAIL)

@@ -1,11 +1,10 @@
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
 import { useDispatch } from 'react-redux';
+import { Formik, Form, Field } from 'formik';
 import { Button, Icon } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
-import styles from '../../../../styles/Credentials.module.scss';
-import { authSchema } from '../../../../validation';
-import { Input } from '../../../../components';
+import { authSchema } from '../../validation';
+import styles from '../../styles/Credentials.module.scss';
+import { Input } from '../../components';
 
 interface IValues {
   email: string;
@@ -21,10 +20,8 @@ const INITIAL_VALUES: IValues = {
   passwordConfirmation: '',
 };
 
-export const LoginForm: React.FC = () => {
+export const Restore: React.FC = () => {
   const dispatch = useDispatch();
-
-  const history = useHistory();
 
   return (
     <Formik
@@ -73,16 +70,6 @@ export const LoginForm: React.FC = () => {
                   placeholder="Password"
                   type="password"
                 />
-              </div>
-
-              <div className={styles.textButtonContainer}>
-                <Button
-                  color="primary"
-                  onClick={() =>
-                    history.push('/auth/restore')
-                  }>
-                  Forget password?
-                </Button>
               </div>
               <Button
                 color="primary"
