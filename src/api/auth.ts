@@ -5,13 +5,20 @@ const REQUEST_URL = '/auth';
 
 interface IAuthApi {
   register: (
-    userData: IUserData
-  ) => Promise<AxiosResponse<IUserDataResponse>>;
+    userData: IUserDataRegisterResponse
+  ) => Promise<AxiosResponse<IUserDataRegisterResponse>>;
+  login: (
+    userData: IUserDataLogin
+  ) => Promise<AxiosResponse<IUserDataLoginResponse>>;
 }
 
 const { post } = httpClient;
 
-export const createApi = (): IAuthApi => ({
+const createApi = (): IAuthApi => ({
   register: (userData) =>
     post(`${REQUEST_URL}/registration`, userData),
+  login: (userData) =>
+    post(`${REQUEST_URL}/login`, userData),
 });
+
+export const authApi = createApi();

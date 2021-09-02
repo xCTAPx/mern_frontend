@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import styles from '../../../../styles/Credentials.module.scss';
 import { authSchema } from '../../../../validation';
 import { Input } from '../../../../components';
+import { LOGIN } from '../../../../store';
 
 interface IValues {
   email: string;
@@ -33,7 +34,7 @@ export const LoginForm: React.FC = () => {
       validationSchema={authSchema}
       onSubmit={(values: IValues) => {
         dispatch({
-          type: 'LOGIN_FORM_SEND_DATA',
+          type: LOGIN,
           payload: values,
         });
       }}>
@@ -78,12 +79,11 @@ export const LoginForm: React.FC = () => {
               <div className={styles.textButtonContainer}>
                 <Button
                   color="primary"
-                  onClick={() =>
-                    history.push('/auth/restore')
-                  }>
+                  onClick={() => history.push('/restore')}>
                   Forget password?
                 </Button>
               </div>
+
               <Button
                 color="primary"
                 endIcon={<Icon>send</Icon>}

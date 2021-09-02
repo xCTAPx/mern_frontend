@@ -6,27 +6,52 @@ import {
   PutEffect,
   takeEvery,
 } from 'redux-saga/effects';
-import { createApi } from '../../api';
+import { authApi } from '../../api';
+import {
+  LOGIN,
+  REGISTER,
+  LOGIN_SUCCEED,
+  REGISTRATION_SUCCEED,
+} from '../actions';
 
-export type WatchRegister = Generator<
+export type WatchAuth = Generator<
   ForkEffect<never>,
   void,
   void
 >;
-type AuthSaga = Generator<
-  | ForkEffect<AxiosResponse<IUserDataResponse>>
+type RegistrationSaga = Generator<
+  | ForkEffect<AxiosResponse<IUserDataRegisterResponse>>
+  | PutEffect<IAction<unknown>>,
+  void,
+  void
+>;
+type LoginSaga = Generator<
+  | ForkEffect<AxiosResponse<IUserDataLoginResponse>>
   | PutEffect<IAction<unknown>>,
   void,
   void
 >;
 
-const api = createApi();
-
-function* authSaga(action: IAction<IUserData>): AuthSaga {
-  const user = yield spawn(api.register, action.payload);
-  yield put({ type: 'LOGIN_SUCCEEDED', payload: user });
+function* registrationSaga(
+  action: IAction<IUserDataRegisterResponse>
+): RegistrationSaga {
+  const user = yield spawn(
+    authApi.register,
+    action.payload
+  );
+  yield put({ type: REGISTRATION_SUCCEED, payload: user });
 }
 
-export function* watchRegister(): WatchRegister {
-  yield takeEvery('LOGIN_FORM_SEND_DATA', authSaga);
+function* loginSaga(
+  action: IAction<IUserDataLoginResponse>
+): LoginSaga {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const user = yield spawn(authApi.login, action.payload);
+  yield put({ type: LOGIN_SUCCEED, payload: user });
+}
+
+export function* watchAuth(): WatchAuth {
+  yield takeEvery(REGISTER, registrationSaga);
+  yield takeEvery(LOGIN, loginSaga);
 }

@@ -2,27 +2,30 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch } from 'react-redux';
 import { Button, Icon } from '@material-ui/core';
-import styles from '../../../../styles/Credentials.module.scss';
-import { authSchema } from '../../../../validation';
-import { Input } from '../../../../components';
-import { REGISTER } from '../../../../store';
+import { useParams } from 'react-router';
+import styles from '../../../styles/Credentials.module.scss';
+import { authSchema } from '../../../validation';
+import { Input } from '../../../components';
+import { SET_NEW_PASSWORD } from '../../../store';
 
 interface IValues {
-  email: string;
-  nickname: string;
   password: string;
   passwordConfirmation: string;
 }
 
 const INITIAL_VALUES: IValues = {
-  email: '',
-  nickname: '',
   password: '',
   passwordConfirmation: '',
 };
 
-export const RegistrationForm: React.FC = () => {
+interface IUrlParams {
+  resetToken: string;
+}
+
+export const Password: React.FC = () => {
   const dispatch = useDispatch();
+
+  const { resetToken } = useParams<IUrlParams>();
 
   return (
     <Formik
@@ -31,28 +34,22 @@ export const RegistrationForm: React.FC = () => {
       validationSchema={authSchema}
       onSubmit={(values: IValues) => {
         dispatch({
-          type: REGISTER,
-          payload: values,
+          type: SET_NEW_PASSWORD,
+          payload: { ...values, resetToken },
         });
       }}>
       {({ errors, touched }) => {
         const {
-          email: emailTouched,
-          nickname: nicknameTouched,
           password: passwordTouched,
           passwordConfirmation:
             password_confirmationTouched,
         } = touched;
 
         const {
-          email: emailError,
-          nickname: nicknameError,
           password: passwordError,
           passwordConfirmation: password_confirmationError,
         } = errors;
 
-        const email = emailTouched && emailError;
-        const nickname = nicknameTouched && nicknameError;
         const password = passwordTouched && passwordError;
         const passwordConfirmation =
           password_confirmationTouched &&
@@ -60,26 +57,10 @@ export const RegistrationForm: React.FC = () => {
 
         return (
           <Form className={styles.wrapper}>
-            <h6 className={styles.title}>Registration</h6>
+            <h6 className={styles.title}>
+              Enter new password
+            </h6>
             <div className={styles.form}>
-              <div className={styles.inputWrapper}>
-                <Field
-                  component={Input}
-                  error={email}
-                  errorMessage={email}
-                  name="email"
-                  placeholder="E-mail"
-                />
-              </div>
-              <div className={styles.inputWrapper}>
-                <Field
-                  component={Input}
-                  error={nickname}
-                  errorMessage={nickname}
-                  name="nickname"
-                  placeholder="Nickname"
-                />
-              </div>
               <div className={styles.inputWrapper}>
                 <Field
                   component={Input}
@@ -107,7 +88,7 @@ export const RegistrationForm: React.FC = () => {
                 size="large"
                 type="submit"
                 variant="contained">
-                Submit
+                Change password
               </Button>
             </div>
           </Form>

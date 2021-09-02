@@ -42,5 +42,6 @@ module.exports = {
     '@typescript-eslint/unbound-method': 'off',
     '@typescript-eslint/no-unsafe-return': 'off',
     '@typescript-eslint/ban-types': 'off',
+    'no-case-declarations': 'off',
   },
 };

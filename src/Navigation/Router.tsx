@@ -9,8 +9,12 @@ const Routes: React.FC = () => {
       <Route exact path="/">
         <Redirect to="/auth" />
       </Route>
-      <Route component={Auth} path="/auth" />
-      <Route component={Restore} path="/restore" />
+      <Route component={Auth} exact path="/auth" />
+      <Route
+        component={Restore}
+        exact
+        path="/restore/:resetToken?"
+      />
     </Switch>
   );
 };
