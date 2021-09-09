@@ -1,12 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { AxiosResponse } from 'axios';
 import {
   spawn,
   ForkEffect,
   put,
+  call,
   PutEffect,
   takeEvery,
+  CallEffect,
 } from 'redux-saga/effects';
-import { authApi } from '../../api';
+import { authApi, IPasswords } from '../../api';
 import {
   LOGIN,
   REGISTER,
@@ -21,26 +24,16 @@ export type WatchAuth = Generator<
   void,
   void
 >;
-type RegistrationSaga = Generator<
-  | ForkEffect<AxiosResponse<IUserDataRegisterResponse>>
+
+type SagaSpawn<T> = Generator<
+  | ForkEffect<AxiosResponse<T>>
   | PutEffect<IAction<unknown>>,
   void,
   void
 >;
-type LoginSaga = Generator<
-  | ForkEffect<AxiosResponse<IUserDataLoginResponse>>
-  | PutEffect<IAction<unknown>>,
-  void,
-  void
->;
-type RestoreSaga = Generator<
-  | ForkEffect<AxiosResponse<void>>
-  | PutEffect<IAction<unknown>>,
-  void,
-  void
->;
-type SetPasswordSaga = Generator<
-  | ForkEffect<AxiosResponse<void>>
+
+type SagaWorker<T> = Generator<
+  | CallEffect<AxiosResponse<T>>
   | PutEffect<IAction<unknown>>,
   void,
   void
@@ -48,7 +41,7 @@ type SetPasswordSaga = Generator<
 
 function* registrationSaga(
   action: IAction<IUserDataRegisterResponse>
-): RegistrationSaga {
+): SagaSpawn<IUserDataRegisterResponse> {
   const user = yield spawn(
     authApi.register,
     action.payload
@@ -57,31 +50,43 @@ function* registrationSaga(
 }
 
 function* loginSaga(
-  action: IAction<IUserDataLoginResponse>
-): LoginSaga {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  const user = yield spawn(authApi.login, action.payload);
-  yield put({ type: LOGIN_SUCCEED, payload: user });
+  action: IAction<IUserDataLogin>
+): SagaWorker<IUserDataLoginResponse> {
+  const response = yield call(
+    authApi.login,
+    action.payload
+  );
+
+  yield put({
+    type: LOGIN_SUCCEED,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    payload: response.data.user,
+  });
 }
 
-function* restoreSaga(action: IAction): RestoreSaga {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
+function* restoreSaga(
+  action: IAction<string>
+): SagaSpawn<void> {
   yield spawn(authApi.restore, action.payload);
 }
 
 function* setPasswordSaga(
-  action: IAction
-): SetPasswordSaga {
+  action: IAction<IPasswords>
+): SagaSpawn<void> {
+  yield spawn(authApi.setPassword, action.payload);
+}
+
+function* workerSaga(action: IAction<IPasswords>) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  yield spawn(authApi.setPassword, action.payload);
+  yield spawn(loginSaga, action);
 }
 
 export function* watchAuth(): WatchAuth {
   yield takeEvery(REGISTER, registrationSaga);
-  yield takeEvery(LOGIN, loginSaga);
+  yield takeEvery(LOGIN, workerSaga);
   yield takeEvery(RESTORE_PASSWORD, restoreSaga);
   yield takeEvery(SET_NEW_PASSWORD, setPasswordSaga);
 }

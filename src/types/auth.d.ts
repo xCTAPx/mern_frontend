@@ -8,6 +8,7 @@ declare interface IUserDataRegisterResponse {
   password: string;
   passwordConfirmation: string;
   nickname: string;
+  isActivated: boolean;
 }
 
 declare interface IUserDataResponse {

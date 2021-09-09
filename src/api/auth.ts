@@ -3,7 +3,7 @@ import { httpClient } from '../httpClient';
 
 const REQUEST_URL = '/auth';
 
-interface IPasswords {
+export interface IPasswords {
   password: string;
   passwordConfirmation: string;
 }
