@@ -10,16 +10,12 @@ import { LOGIN } from '../../../../store';
 
 interface IValues {
   email: string;
-  nickname: string;
   password: string;
-  passwordConfirmation: string;
 }
 
 const INITIAL_VALUES: IValues = {
   email: '',
-  nickname: '',
   password: '',
-  passwordConfirmation: '',
 };
 
 export const LoginForm: React.FC = () => {

@@ -1,4 +1,4 @@
-declare interface IAction<T> {
+declare interface IAction<T = {}> {
   type: string;
   payload: T;
 }
