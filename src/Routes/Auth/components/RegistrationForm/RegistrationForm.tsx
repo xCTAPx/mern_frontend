@@ -3,7 +3,7 @@ import { Formik, Form, Field } from 'formik';
 import { useDispatch } from 'react-redux';
 import { Button, Icon } from '@material-ui/core';
 import styles from '../../../../styles/Credentials.module.scss';
-import { authSchema } from '../../../../validation';
+import { registrationSchema } from '../../../../validation';
 import { Input } from '../../../../components';
 import { REGISTER } from '../../../../store';
 
@@ -28,7 +28,7 @@ export const RegistrationForm: React.FC = () => {
     <Formik
       initialValues={INITIAL_VALUES}
       validateOnBlur
-      validationSchema={authSchema}
+      validationSchema={registrationSchema}
       onSubmit={(values: IValues) => {
         dispatch({
           type: REGISTER,

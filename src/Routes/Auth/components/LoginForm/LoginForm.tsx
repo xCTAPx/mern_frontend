@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Button, Icon } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import styles from '../../../../styles/Credentials.module.scss';
-import { authSchema } from '../../../../validation';
+import { loginSchema } from '../../../../validation';
 import { Input } from '../../../../components';
 import { LOGIN } from '../../../../store';
 
@@ -31,7 +31,7 @@ export const LoginForm: React.FC = () => {
     <Formik
       initialValues={INITIAL_VALUES}
       validateOnBlur
-      validationSchema={authSchema}
+      validationSchema={loginSchema}
       onSubmit={(values: IValues) => {
         dispatch({
           type: LOGIN,

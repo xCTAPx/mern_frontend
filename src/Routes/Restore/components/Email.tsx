@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import { Button, Icon } from '@material-ui/core';
-import { authSchema } from '../../../validation';
+import { emailSchema } from '../../../validation';
 import styles from '../../../styles/Credentials.module.scss';
 import { Input } from '../../../components';
 import { RESTORE_PASSWORD } from '../../../store';
@@ -22,7 +22,7 @@ export const Email: React.FC = () => {
     <Formik
       initialValues={INITIAL_VALUES}
       validateOnBlur
-      validationSchema={authSchema}
+      validationSchema={emailSchema}
       onSubmit={(values: IValues) => {
         dispatch({
           type: RESTORE_PASSWORD,

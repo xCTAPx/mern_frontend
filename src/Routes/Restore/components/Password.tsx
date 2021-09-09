@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Button, Icon } from '@material-ui/core';
 import { useParams } from 'react-router';
 import styles from '../../../styles/Credentials.module.scss';
-import { authSchema } from '../../../validation';
+import { passwordSchema } from '../../../validation';
 import { Input } from '../../../components';
 import { SET_NEW_PASSWORD } from '../../../store';
 
@@ -31,7 +31,7 @@ export const Password: React.FC = () => {
     <Formik
       initialValues={INITIAL_VALUES}
       validateOnBlur
-      validationSchema={authSchema}
+      validationSchema={passwordSchema}
       onSubmit={(values: IValues) => {
         dispatch({
           type: SET_NEW_PASSWORD,

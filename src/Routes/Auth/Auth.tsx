@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent } from 'react';
 import { Tabs, Tab } from '@material-ui/core';
 import styles from './Auth.module.scss';
+import commonStyles from '../../styles/Credentials.module.scss';
 import { LoginForm, RegistrationForm } from './components';
 
 type TabsValues = 0 | 1;
@@ -16,7 +17,7 @@ export const Auth: React.FC = () => {
   };
 
   return (
-    <section className={styles.background}>
+    <section className={commonStyles.background}>
       <Tabs
         aria-label="disabled tabs example"
         className={styles.tabs}
