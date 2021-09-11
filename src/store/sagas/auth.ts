@@ -1,13 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { AxiosResponse } from 'axios';
 import {
   spawn,
-  ForkEffect,
   put,
   call,
-  PutEffect,
   takeEvery,
-  CallEffect,
 } from 'redux-saga/effects';
 import { authApi, IPasswords } from '../../api';
 import {
@@ -19,29 +15,9 @@ import {
   SET_NEW_PASSWORD,
 } from '../actions';
 
-export type WatchAuth = Generator<
-  ForkEffect<never>,
-  void,
-  void
->;
-
-type SagaSpawn<T> = Generator<
-  | ForkEffect<AxiosResponse<T>>
-  | PutEffect<IAction<unknown>>,
-  void,
-  void
->;
-
-type SagaWorker<T> = Generator<
-  | CallEffect<AxiosResponse<T>>
-  | PutEffect<IAction<unknown>>,
-  void,
-  void
->;
-
 function* registrationSaga(
   action: IAction<IUserDataRegisterResponse>
-): SagaSpawn<IUserDataRegisterResponse> {
+): SagaWorker<IUserDataRegisterResponse> {
   const user = yield spawn(
     authApi.register,
     action.payload
@@ -59,29 +35,26 @@ function* loginSaga(
 
   yield put({
     type: LOGIN_SUCCEED,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    payload: response.data.user,
+    payload: (
+      response as unknown as AxiosResponse<IUserDataLoginResponse>
+    ).data.user, // because typescript
   });
 }
 
 function* restoreSaga(
   action: IAction<string>
-): SagaSpawn<void> {
+): SagaWorker<void> {
   yield spawn(authApi.restore, action.payload);
 }
 
 function* setPasswordSaga(
   action: IAction<IPasswords>
-): SagaSpawn<void> {
+): SagaWorker<void> {
   yield spawn(authApi.setPassword, action.payload);
 }
 
 function* workerSaga(action: IAction<IPasswords>) {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  yield spawn(loginSaga, action);
+  yield spawn<SpawnEffect>(loginSaga, action);
 }
 
 export function* watchAuth(): WatchAuth {

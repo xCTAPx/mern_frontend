@@ -1,5 +1,5 @@
 import { all, AllEffect } from 'redux-saga/effects';
-import { WatchAuth, watchAuth } from './auth';
+import { watchAuth } from './auth';
 
 type RootSaga = Generator<AllEffect<WatchAuth>, void, void>;
 

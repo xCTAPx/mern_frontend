@@ -43,5 +43,6 @@ module.exports = {
     '@typescript-eslint/no-unsafe-return': 'off',
     '@typescript-eslint/ban-types': 'off',
     'no-case-declarations': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
   },
 };
