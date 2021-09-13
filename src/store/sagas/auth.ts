@@ -6,8 +6,10 @@ import {
   takeEvery,
 } from 'redux-saga/effects';
 import { authApi, IPasswords } from '../../api';
+import { redirectTo } from '../../utils';
 import {
   LOGIN,
+  LOGOUT,
   REGISTER,
   LOGIN_SUCCEED,
   REGISTRATION_SUCCEED,
@@ -37,8 +39,15 @@ function* loginSaga(
     type: LOGIN_SUCCEED,
     payload: (
       response as unknown as AxiosResponse<IUserDataLoginResponse>
-    ).data.user, // because typescript
+    ).data, // because typescript
   });
+
+  redirectTo('/home');
+}
+
+function* logoutSaga(): SagaWorker<void> {
+  yield spawn(authApi.logout);
+  redirectTo('/auth');
 }
 
 function* restoreSaga(
@@ -60,6 +69,7 @@ function* workerSaga(action: IAction<IPasswords>) {
 export function* watchAuth(): WatchAuth {
   yield takeEvery(REGISTER, registrationSaga);
   yield takeEvery(LOGIN, workerSaga);
+  yield takeEvery(LOGOUT, logoutSaga);
   yield takeEvery(RESTORE_PASSWORD, restoreSaga);
   yield takeEvery(SET_NEW_PASSWORD, setPasswordSaga);
 }

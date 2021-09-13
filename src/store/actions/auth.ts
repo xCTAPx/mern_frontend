@@ -1,4 +1,5 @@
 export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
 export const LOGIN_SUCCEED = 'LOGIN_SUCCEED';
 export const REGISTER = 'REGISTER';
 export const REGISTRATION_SUCCEED = 'REGISTRATION_SUCCEED';
