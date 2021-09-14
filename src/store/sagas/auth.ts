@@ -15,6 +15,7 @@ import {
   REGISTRATION_SUCCEED,
   RESTORE_PASSWORD,
   SET_NEW_PASSWORD,
+  CHECK_ACCESS,
 } from '../actions';
 
 function* registrationSaga(
@@ -66,10 +67,16 @@ function* workerSaga(action: IAction<IPasswords>) {
   yield spawn<SpawnEffect>(loginSaga, action);
 }
 
+function* checkAccessSaga() {
+  yield spawn(authApi.checkAccess);
+}
+
 export function* watchAuth(): WatchAuth {
   yield takeEvery(REGISTER, registrationSaga);
   yield takeEvery(LOGIN, workerSaga);
   yield takeEvery(LOGOUT, logoutSaga);
   yield takeEvery(RESTORE_PASSWORD, restoreSaga);
   yield takeEvery(SET_NEW_PASSWORD, setPasswordSaga);
+
+  yield takeEvery(CHECK_ACCESS, checkAccessSaga);
 }

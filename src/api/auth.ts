@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { httpClient } from '../httpClient';
+import httpClient from '../httpClient';
 
 const REQUEST_URL = '/auth';
 
@@ -20,9 +20,10 @@ interface IAuthApi {
   setPassword: (
     passwords: IPasswords
   ) => Promise<AxiosResponse<void>>;
+  checkAccess: () => Promise<AxiosResponse<void>>;
 }
 
-const { post, put } = httpClient;
+const { post, put, get } = httpClient;
 
 export const authApi: IAuthApi = {
   register: (userData) =>
@@ -33,4 +34,5 @@ export const authApi: IAuthApi = {
   restore: (email) => post(`${REQUEST_URL}/restore`, email),
   setPassword: (passwords) =>
     put(`${REQUEST_URL}/createNewPassword`, passwords),
+  checkAccess: () => get(`${REQUEST_URL}/checkAccess`),
 };

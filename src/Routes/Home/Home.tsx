@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../hooks';
-import { LOGOUT } from '../../store';
+import { LOGOUT, CHECK_ACCESS } from '../../store';
 
 export const Home: React.FC = () => {
   const { user } = useTypedSelector((state) => state);
@@ -18,6 +18,12 @@ export const Home: React.FC = () => {
           dispatch({ type: LOGOUT });
         }}>
         Logout
+      </button>
+      <button
+        onClick={() => {
+          dispatch({ type: CHECK_ACCESS });
+        }}>
+        Check access
       </button>
     </section>
   );
