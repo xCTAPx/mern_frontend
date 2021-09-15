@@ -29,6 +29,20 @@ module.exports = {
     'no-alert': 'error',
     semi: ['error', 'always'],
     'react/prop-types': 'off',
+    'react/jsx-sort-props': [
+      'warn',
+      {
+        callbacksLast: true,
+      },
+    ],
     '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    '@typescript-eslint/restrict-template-expressions':
+      'off',
+    '@typescript-eslint/unbound-method': 'off',
+    '@typescript-eslint/no-unsafe-return': 'off',
+    '@typescript-eslint/ban-types': 'off',
+    'no-case-declarations': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
   },
 };

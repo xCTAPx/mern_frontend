@@ -1,0 +1,8 @@
+export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
+export const LOGIN_SUCCEED = 'LOGIN_SUCCEED';
+export const REGISTER = 'REGISTER';
+export const REGISTRATION_SUCCEED = 'REGISTRATION_SUCCEED';
+export const RESTORE_PASSWORD = 'RESTORE_PASSWORD';
+export const SET_NEW_PASSWORD = 'SET_NEW_PASSWORD';
+export const CHECK_ACCESS = 'CHECK_ACCESS';
