@@ -20,7 +20,7 @@ describe('should return correct store:', () => {
     state = { user: null };
   });
 
-  it('should return { user: null } after logout:', () => {
+  it('should return null after logout:', () => {
     const logoutAction = {
       type: 'LOGOUT',
       payload: undefined,
@@ -69,5 +69,16 @@ describe('should return correct store:', () => {
     const newState = user(state.user, loginAction);
 
     expect(newState).toEqual(userExpectation);
+  });
+
+  it('should return null after login if payload is undefined:', () => {
+    const loginAction = {
+      type: 'LOGIN_SUCCEED',
+      payload: undefined,
+    };
+
+    const newState = user(state.user, loginAction);
+
+    expect(newState).toEqual(null);
   });
 });
