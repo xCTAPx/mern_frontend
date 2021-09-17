@@ -36,18 +36,26 @@ function* loginSaga(
     action.payload
   );
 
+  const resp =
+    response as unknown as AxiosResponse<IUserDataLoginResponse>; // because typescript
+
   yield put({
     type: LOGIN_SUCCEED,
-    payload: (
-      response as unknown as AxiosResponse<IUserDataLoginResponse>
-    ).data, // because typescript
+    payload: resp.data,
   });
 
+  const { tokens } = resp.data;
+  const { accessToken, refreshToken } = tokens;
+
+  localStorage.setItem('accessToken', accessToken);
+  localStorage.setItem('refreshToken', refreshToken);
   redirectTo('/home');
 }
 
 function* logoutSaga(): SagaWorker<void> {
   yield spawn(authApi.logout);
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('refreshToken');
   redirectTo('/auth');
 }
 

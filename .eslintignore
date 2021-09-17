@@ -4,5 +4,6 @@ node_modules
 dist
 # don't ever lint self config file
 .eslintrc.js
+jest.config.js
 # don't ever lint file for performance testing
 /src/reportWebVitals.ts
