@@ -10,8 +10,8 @@ export interface IPasswords {
 
 interface IAuthApi {
   register: (
-    userData: IUserDataRegisterResponse
-  ) => Promise<AxiosResponse<IUserDataRegisterResponse>>;
+    userData: IUserDataRegister
+  ) => Promise<AxiosResponse<IUserDataResponse>>;
   login: (
     userData: IUserDataLogin
   ) => Promise<AxiosResponse<IUserDataLoginResponse>>;

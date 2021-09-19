@@ -23,7 +23,6 @@ describe('should return correct store:', () => {
   it('should return null after logout:', () => {
     const logoutAction = {
       type: 'LOGOUT',
-      payload: undefined,
     };
 
     state.user = userMock;
@@ -36,7 +35,6 @@ describe('should return correct store:', () => {
   it('should return default state after dispatching unexisted action:', () => {
     const unexistedAction = {
       type: 'UNEXISTED',
-      payload: undefined,
     };
 
     const newState = user(state.user, unexistedAction);
@@ -47,7 +45,6 @@ describe('should return correct store:', () => {
   it('should return default state after registration:', () => {
     const registrationAction = {
       type: 'REGISTRATION_SUCCEED',
-      payload: undefined,
     };
 
     const newState = user(state.user, registrationAction);
@@ -74,7 +71,6 @@ describe('should return correct store:', () => {
   it('should return null after login if payload is undefined:', () => {
     const loginAction = {
       type: 'LOGIN_SUCCEED',
-      payload: undefined,
     };
 
     const newState = user(state.user, loginAction);

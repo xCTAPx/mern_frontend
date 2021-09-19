@@ -8,13 +8,13 @@ import {
 type UserState = IUser | null;
 type UserReducer = Reducer<
   UserState,
-  IAction<IUserDataLoginResponse | undefined>
+  Action<IUserDataLoginResponse | undefined>
 >;
 
 const withPayload = (
-  action: IAction<IUserDataLoginResponse | undefined>
-): action is IAction<IUserDataLoginResponse> =>
-  Boolean(action.payload);
+  action: Action<IUserDataLoginResponse | undefined>
+): action is Action<IUserDataLoginResponse> =>
+  'payload' in action;
 
 export const user: UserReducer = (state = null, action) => {
   switch (action.type) {

@@ -14,7 +14,7 @@ declare type WatchAuth = Generator<
 declare type SagaWorker<T> = Generator<
   | CallEffect<AxiosResponse<T>>
   | ForkEffect<AxiosResponse<T>>
-  | PutEffect<IAction<unknown>>,
+  | PutEffect<Action<unknown>>,
   void,
   void
 >;

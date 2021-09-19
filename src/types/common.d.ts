@@ -1,7 +1,10 @@
-declare interface IAction<T = {}> {
+declare type Action<T = undefined> = {
   type: string;
-  payload: T;
-}
+} & (T extends undefined ? {} : { payload: T });
+
+declare type ActionCreator<T = undefined> = (
+  arg: T
+) => Action<T>;
 
 declare type RootState = ReturnType<
   typeof import('../store/reducers/rootReducer').rootReducer

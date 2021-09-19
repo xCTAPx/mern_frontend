@@ -19,8 +19,8 @@ import {
 } from '../actions';
 
 function* registrationSaga(
-  action: IAction<IUserDataRegisterResponse>
-): SagaWorker<IUserDataRegisterResponse> {
+  action: Action<IUserDataRegister>
+): SagaWorker<IUserDataRegister> {
   const user = yield spawn(
     authApi.register,
     action.payload
@@ -29,7 +29,7 @@ function* registrationSaga(
 }
 
 function* loginSaga(
-  action: IAction<IUserDataLogin>
+  action: Action<IUserDataLogin>
 ): SagaWorker<IUserDataLoginResponse> {
   const response = yield call(
     authApi.login,
@@ -60,18 +60,18 @@ function* logoutSaga(): SagaWorker<void> {
 }
 
 function* restoreSaga(
-  action: IAction<string>
+  action: Action<string>
 ): SagaWorker<void> {
   yield spawn(authApi.restore, action.payload);
 }
 
 function* setPasswordSaga(
-  action: IAction<IPasswords>
+  action: Action<IPasswords>
 ): SagaWorker<void> {
   yield spawn(authApi.setPassword, action.payload);
 }
 
-function* workerSaga(action: IAction<IPasswords>) {
+function* workerSaga(action: Action<IPasswords>) {
   yield spawn<SpawnEffect>(loginSaga, action);
 }
 
