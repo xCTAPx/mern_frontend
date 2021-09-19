@@ -1,11 +1,10 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import { Button, Icon } from '@material-ui/core';
 import { emailSchema } from '../../../validation';
 import styles from '../../../styles/Credentials.module.scss';
 import { Input } from '../../../components';
-import { RESTORE_PASSWORD } from '../../../store';
+import { useActions } from '../../../hooks';
 
 interface IValues {
   email: string;
@@ -16,19 +15,14 @@ const INITIAL_VALUES: IValues = {
 };
 
 export const Email: React.FC = () => {
-  const dispatch = useDispatch();
+  const { restorePasswordAction } = useActions();
 
   return (
     <Formik
       initialValues={INITIAL_VALUES}
       validateOnBlur
       validationSchema={emailSchema}
-      onSubmit={(values: IValues) => {
-        dispatch({
-          type: RESTORE_PASSWORD,
-          payload: values,
-        });
-      }}>
+      onSubmit={restorePasswordAction}>
       {({ errors, touched }) => {
         const { email: emailTouched } = touched;
 

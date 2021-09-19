@@ -69,6 +69,8 @@ function* setPasswordSaga(
   action: Action<IPasswords>
 ): SagaWorker<void> {
   yield spawn(authApi.setPassword, action.payload);
+
+  redirectTo('/auth');
 }
 
 function* workerSaga(action: Action<IPasswords>) {

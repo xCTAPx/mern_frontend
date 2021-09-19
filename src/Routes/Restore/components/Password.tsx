@@ -1,12 +1,11 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import { useDispatch } from 'react-redux';
 import { Button, Icon } from '@material-ui/core';
 import { useParams } from 'react-router';
 import styles from '../../../styles/Credentials.module.scss';
 import { passwordSchema } from '../../../validation';
 import { Input } from '../../../components';
-import { SET_NEW_PASSWORD } from '../../../store';
+import { useActions } from '../../../hooks';
 
 interface IValues {
   password: string;
@@ -23,7 +22,7 @@ interface IUrlParams {
 }
 
 export const Password: React.FC = () => {
-  const dispatch = useDispatch();
+  const { setPasswordAction } = useActions();
 
   const { resetToken } = useParams<IUrlParams>();
 
@@ -33,10 +32,7 @@ export const Password: React.FC = () => {
       validateOnBlur
       validationSchema={passwordSchema}
       onSubmit={(values: IValues) => {
-        dispatch({
-          type: SET_NEW_PASSWORD,
-          payload: { ...values, resetToken },
-        });
+        setPasswordAction({ ...values, resetToken });
       }}>
       {({ errors, touched }) => {
         const {

@@ -8,36 +8,36 @@ import {
   SET_NEW_PASSWORD,
 } from '../actions';
 
-export const LoginAction = (
+export const loginAction = (
   loginData: IUserDataLogin
 ): Action<IUserDataLogin> => ({
   type: LOGIN,
   payload: loginData,
 });
 
-export const RegistrationAction: ActionCreator<IUserDataRegister> =
+export const registrationAction: ActionCreator<IUserDataRegister> =
   (registrationData) => ({
     type: REGISTER,
     payload: registrationData,
   });
 
-export const LogoutAction: ActionCreator = () => ({
+export const logoutAction: ActionCreator = () => ({
   type: LOGOUT,
   payload: undefined,
 });
 
-export const CheckAccessAction: ActionCreator = () => ({
+export const checkAccessAction: ActionCreator = () => ({
   type: CHECK_ACCESS,
   payload: undefined,
 });
 
-export const RestorePasswordAction: ActionCreator<string> =
+export const restorePasswordAction: ActionCreator<string> =
   (email) => ({
     type: RESTORE_PASSWORD,
     payload: email,
   });
 
-export const SetPasswordAction: ActionCreator<IPasswords> =
+export const setPasswordAction: ActionCreator<IPasswords> =
   (passwords) => ({
     type: SET_NEW_PASSWORD,
     payload: passwords,
