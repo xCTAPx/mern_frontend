@@ -73,11 +73,13 @@ function* setPasswordSaga(
   redirectTo('/auth');
 }
 
-function* workerSaga(action: Action<IPasswords>) {
+function* workerSaga(
+  action: Action<IPasswords>
+): SagaWorker<void> {
   yield spawn<SpawnEffect>(loginSaga, action);
 }
 
-function* checkAccessSaga() {
+function* checkAccessSaga(): SagaWorker<void> {
   yield spawn(authApi.checkAccess);
 }
 
