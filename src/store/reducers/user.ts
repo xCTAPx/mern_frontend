@@ -8,28 +8,27 @@ import {
 type UserState = IUser | null;
 type UserReducer = Reducer<
   UserState,
-  IAction<IUserDataLoginResponse>
+  Action<IUserDataLoginResponse | undefined>
 >;
 
-//@ts-ignore because action payload contains IUser, but is not IUser
+const withPayload = (
+  action: Action<IUserDataLoginResponse | undefined>
+): action is Action<IUserDataLoginResponse> =>
+  'payload' in action;
+
 export const user: UserReducer = (state = null, action) => {
   switch (action.type) {
     case REGISTRATION_SUCCEED:
-      return action.payload;
+      return state;
     case LOGIN_SUCCEED:
-      const { user, tokens } = action.payload;
+      if (!withPayload(action)) return null;
+
+      const { user } = action.payload;
 
       const { email, nickname, id } = user;
-      const { accessToken, refreshToken } = tokens;
-
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
 
       return { email, nickname, id };
     case LOGOUT:
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
-
       return null;
     default:
       return state;

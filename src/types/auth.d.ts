@@ -3,7 +3,7 @@ declare interface ITokens {
   refreshToken: string;
 }
 
-declare interface IUserDataRegisterResponse {
+declare interface IUserDataRegister {
   email: string;
   password: string;
   passwordConfirmation: string;

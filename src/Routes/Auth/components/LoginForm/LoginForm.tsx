@@ -1,12 +1,11 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import { useDispatch } from 'react-redux';
 import { Button, Icon } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import styles from '../../../../styles/Credentials.module.scss';
 import { loginSchema } from '../../../../validation';
 import { Input } from '../../../../components';
-import { LOGIN } from '../../../../store';
+import { useActions } from '../../../../hooks';
 
 interface IValues {
   email: string;
@@ -19,7 +18,7 @@ const INITIAL_VALUES: IValues = {
 };
 
 export const LoginForm: React.FC = () => {
-  const dispatch = useDispatch();
+  const { loginAction } = useActions();
 
   const history = useHistory();
 
@@ -28,12 +27,7 @@ export const LoginForm: React.FC = () => {
       initialValues={INITIAL_VALUES}
       validateOnBlur
       validationSchema={loginSchema}
-      onSubmit={(values: IValues) => {
-        dispatch({
-          type: LOGIN,
-          payload: values,
-        });
-      }}>
+      onSubmit={loginAction}>
       {({ errors, touched }) => {
         const {
           email: emailTouched,

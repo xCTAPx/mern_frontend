@@ -1,11 +1,10 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import { useDispatch } from 'react-redux';
 import { Button, Icon } from '@material-ui/core';
 import styles from '../../../../styles/Credentials.module.scss';
 import { registrationSchema } from '../../../../validation';
 import { Input } from '../../../../components';
-import { REGISTER } from '../../../../store';
+import { useActions } from '../../../../hooks';
 
 interface IValues {
   email: string;
@@ -22,19 +21,14 @@ const INITIAL_VALUES: IValues = {
 };
 
 export const RegistrationForm: React.FC = () => {
-  const dispatch = useDispatch();
+  const { registrationAction } = useActions();
 
   return (
     <Formik
       initialValues={INITIAL_VALUES}
       validateOnBlur
       validationSchema={registrationSchema}
-      onSubmit={(values: IValues) => {
-        dispatch({
-          type: REGISTER,
-          payload: values,
-        });
-      }}>
+      onSubmit={registrationAction}>
       {({ errors, touched }) => {
         const {
           email: emailTouched,

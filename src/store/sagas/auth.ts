@@ -19,8 +19,8 @@ import {
 } from '../actions';
 
 function* registrationSaga(
-  action: IAction<IUserDataRegisterResponse>
-): SagaWorker<IUserDataRegisterResponse> {
+  action: Action<IUserDataRegister>
+): SagaWorker<IUserDataRegister> {
   const user = yield spawn(
     authApi.register,
     action.payload
@@ -29,45 +29,57 @@ function* registrationSaga(
 }
 
 function* loginSaga(
-  action: IAction<IUserDataLogin>
+  action: Action<IUserDataLogin>
 ): SagaWorker<IUserDataLoginResponse> {
   const response = yield call(
     authApi.login,
     action.payload
   );
 
+  const resp =
+    response as unknown as AxiosResponse<IUserDataLoginResponse>; // because typescript
+
   yield put({
     type: LOGIN_SUCCEED,
-    payload: (
-      response as unknown as AxiosResponse<IUserDataLoginResponse>
-    ).data, // because typescript
+    payload: resp.data,
   });
 
+  const { tokens } = resp.data;
+  const { accessToken, refreshToken } = tokens;
+
+  localStorage.setItem('accessToken', accessToken);
+  localStorage.setItem('refreshToken', refreshToken);
   redirectTo('/home');
 }
 
 function* logoutSaga(): SagaWorker<void> {
   yield spawn(authApi.logout);
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('refreshToken');
   redirectTo('/auth');
 }
 
 function* restoreSaga(
-  action: IAction<string>
+  action: Action<string>
 ): SagaWorker<void> {
   yield spawn(authApi.restore, action.payload);
 }
 
 function* setPasswordSaga(
-  action: IAction<IPasswords>
+  action: Action<IPasswords>
 ): SagaWorker<void> {
   yield spawn(authApi.setPassword, action.payload);
+
+  redirectTo('/auth');
 }
 
-function* workerSaga(action: IAction<IPasswords>) {
+function* workerSaga(
+  action: Action<IPasswords>
+): SagaWorker<void> {
   yield spawn<SpawnEffect>(loginSaga, action);
 }
 
-function* checkAccessSaga() {
+function* checkAccessSaga(): SagaWorker<void> {
   yield spawn(authApi.checkAccess);
 }
 
